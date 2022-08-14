@@ -1,0 +1,73 @@
+Implement the MinStack class:
+
+	MinStack() -> initializes the stack object.
+	void push(int val) -> pushes element 'val' onto the stack.
+	void pop() -> removes element on the top of the stack.
+	int top() -> gets the top element of the stack.
+	int getMin() -> returns the minimum element in the stack.
+
+
+
+
+
+CODE:
+
+class MinStack:
+
+    def __init__(self):
+        self.stack = [] #initialize stack
+        
+    def push(self, val: int) -> None:
+        self.stack.append(val) #add element to the stack
+            
+    def pop(self) -> None:
+        self.stack.pop() #remove element from stack
+        
+    def top(self) -> int:
+        return self.stack[-1]  #return element on top of stack
+        
+    def getMin(self) -> int:
+            return min(self.stack) #return the minimum element in the stack
+
+
+# Your MinStack object will be instantiated and called as such:
+# obj = MinStack()
+# obj.push(val)
+# obj.pop()
+# param_3 = obj.top()
+# param_4 = obj.getMin()
+
+
+OPTIMAL CODE: min work is done in push so there is no work to be done on return
+
+class MinStack:
+
+    def __init__(self):
+        self.stack = [] #initialize stack
+        self.min_stack = [] #initialize stack for min
+        
+    def push(self, val: int) -> None:
+        self.stack.append(val) #add element to the stack
+        if self.min_stack == []: #if min_stack is empty
+           min_val = val #current value is the minimum
+        else:
+            min_val = min(val, self.min_stack[-1]) #find lowest value between current value and last min_stack val
+        self.min_stack.append(min_val) #append lowest value to min_stack
+            
+    def pop(self) -> None:
+        self.stack.pop() #remove element from stack
+        self.min_stack.pop() #remove element from
+        
+    def top(self) -> int:
+        return self.stack[-1]  #return element on top of stack
+        
+    def getMin(self) -> int:
+            return self.min_stack[-1] #return the minimum element in the stack
+
+
+# Your MinStack object will be instantiated and called as such:
+# obj = MinStack()
+# obj.push(val)
+# obj.pop()
+# param_3 = obj.top()
+# param_4 = obj.getMin()
