@@ -1,3 +1,4 @@
 # leetcode_practice
-neetcode/leetcode exercises
-problems done in python3
+Neetcode/Leetcode exercises
+
+Problems done in python3
