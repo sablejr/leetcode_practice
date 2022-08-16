@@ -1,0 +1,45 @@
+input: 2 linked lists 'list1', 'list2'
+merge two list into one sorted list
+return the head of the merged linked list
+
+you want first element of l1, first element of l2, second element of l1, ect.)
+
+l1 and l2 are sorted in non decreasing order
+
+check if list 1 and list 2 are not empty
+	check which list has the smaller element
+		set that node to the return list node 
+		increment that list
+	increment return list
+
+check if just list 1 or just list 2 and set that lists nodes to the return list nodes 
+
+CODE:
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
+        ans = ListNode() #dummy node so we don't have to deal with edge cases of inserting into a LL
+        cur_node = ans #current pointer starting at the beginning of ans
+        while list1 and list2: #while list1 and list2 are not null
+            if list1.val <= list2.val:  #if list1 value is less than or equal too list2 value
+                cur_node.next = list1   #store value of list1 in next node
+                list1 = list1.next      #next list1 node
+            else: #if list2 value bigger
+                cur_node.next = list2 #store value of list2 in next node
+                list2 = list2.next  #next list2 node
+            cur_node = cur_node.next #increment return list node
+            
+        while list1: #if list2 is null 
+                cur_node.next = list1  #add list1 element
+                list1 = list1.next #next list1 node
+                cur_node = cur_node.next #increment return list node
+        while list2: #if list1 is null
+                cur_node.next  = list2 #add list2 element
+                list2 = list2.next #next list2 node
+                cur_node = cur_node.next #increment return list node
+        return ans.next 
