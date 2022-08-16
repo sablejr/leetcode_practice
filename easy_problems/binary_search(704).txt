@@ -1,0 +1,50 @@
+input: int array 'nums' -> sorted in ascending order , int 'target'
+
+binary search -> split array in half search each half to narrow down, update half, and repeat til done
+
+search 'target' in 'nums, if it exists, return  the index of 'target
+else return -1
+MUST USE O(log n) time complexity -> BINARY SEARCH
+
+CODE: 
+
+class Solution:
+    def search(self, nums: List[int], target: int) -> int:
+        high = len(nums) - 1 #end of list
+        low = 0 #beginning of list
+        
+        while high >= low: #while the low value is less than or the same as high value
+            
+            mid = (high + low) // 2 #create midpoint
+            
+            if nums[mid] == target: #if the midpoint number is target, return it
+                return mid
+                
+            if nums[mid] < target: #if the midpoint number is less than target, increment list start
+                low += 1
+                print(low, high, nums[mid]) #HOW TO PRINT BINARY SEARCH FOR DEBUGGING
+                
+            if nums[mid] > target: #if the midpoint number is greater than target, decrement list end
+                high -= 1
+                print(low, high, nums[mid]) #HOW TO PRINT BINARY SEARCH FOR DEBUGGING
+        
+        return(-1) #if value not in array, return -1
+            
+
+
+
+OPTIMAL:
+
+class Solution:
+    def search(self, nums: List[int], target: int) -> int:
+        l, r = 0, len(nums) - 1
+
+        while l <= r:
+            m = l + ((r - l) // 2)  # (l + r) // 2 CAN LEAD TO OVERFLOW
+            if nums[m] > target:
+                r = m - 1
+            elif nums[m] < target:
+                l = m + 1
+            else:
+                return m
+        return -1
