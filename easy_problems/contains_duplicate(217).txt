@@ -1,0 +1,19 @@
+input: array 'nums'
+return: true if value appears more than once in 'nums', false if every element is different
+
+store value in stack/set/dict/list
+iterate over the structure
+	if a value appears 2 or more times in the structure, return true
+	add the item to the structure
+return false otherwise 
+
+CODE:
+
+class Solution:
+    def containsDuplicate(self, nums: List[int]) -> bool:
+        checker = set() #set to store first occurences of an element
+        for i in range(0, len(nums)): 
+            if nums[i] in checker: #if character is already in set, return true
+                return True
+            checker.add(nums[i]) #adds first occurence of nums number
+        return False # if no second+ occurences, return false
